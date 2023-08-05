@@ -27,7 +27,7 @@ router.get('/tasks', async (req, res) => {
 router.delete('/delete', async (req, res) => {
  try{
     console.log(req.body.nome);
-    await deleteData(req.params.nome);
+    await deleteData(req.body.nome);
     res.status(200).send('Tarefa excluida com sucesso!');
   } catch (error) {
     console.error('Erro ao executar a consulta:', error);
