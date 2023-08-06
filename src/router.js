@@ -8,7 +8,7 @@ router.post('/insert', tasksController.insertData);
 router.get('/tasks',  tasksController.getAll);
 router.delete('/delete', tasksController.deleteData);
 router.put('/update', tasksController.updateTask);
-router.post('/auth/register', authController.validateData);
-
+router.post('/auth/register', authController.registerUser);
+router.post('/auth/login',authController.loginUser)
 
 module.exports = router;

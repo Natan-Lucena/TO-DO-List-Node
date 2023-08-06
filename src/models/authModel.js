@@ -7,21 +7,21 @@ const findByUser = async (user) =>{
     const client = await connect();
     const users =  await client.query(`SELECT "User", "Password", "JWT", "Email" FROM users WHERE "User" = $1;`,[user]);
     client.release();
-    return users.rows;
+    return users.rows[0];
 }
 
 const findByEmail = async (Email) =>{
     const client = await connect();
     const users =  await client.query(`SELECT "User", "Password", "JWT", "Email" FROM users WHERE "Email" = $1;`,[Email]);
     client.release();
-    return users.rows;
+    return users.rows[0];
 }
 
 const findByJWT = async (jwt) => {
     const client = await connect();
     const users =  await client.query(`SELECT "User", "Password", "JWT", "Email" FROM users WHERE "JWT" = $1;`,[jwt]);
     client.release();
-    return users.rows;
+    return users.rows[0];
 }
 
 const encryptPassword = async (password) => {
@@ -45,5 +45,6 @@ const registerUser =  async (user, password, email) => {
 module.exports = {
     findByUser,
     findByEmail,
-    registerUser
+    registerUser,
+    verifyPassword
 };
