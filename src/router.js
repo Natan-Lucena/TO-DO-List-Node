@@ -5,7 +5,7 @@ const authController = require('./controllers/authController');
 const router = express.Router();
 
 router.post('/insert', tasksController.insertData);
-router.get('/tasks',  tasksController.getAll);
+router.post('/tasks',  tasksController.getAll);
 router.delete('/delete', tasksController.deleteData);
 router.put('/update', tasksController.updateTask);
 router.post('/auth/register', authController.registerUser);
