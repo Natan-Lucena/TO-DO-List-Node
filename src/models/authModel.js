@@ -1,8 +1,6 @@
 const connect = require('./elephantsql');
 const bcrypt = require('bcrypt');
-//INSERIR NO BANCO DE DADOS AS SENHAS CRIPTOGRAFADAS
-//CHAT GPT JA PASSOU A CALL
-//LOGIN VAI SER NO MESMO MODEL E CONTROLLER
+
 const findByUser = async (user) =>{
     const client = await connect();
     const users =  await client.query(`SELECT "User", "Password", "JWT", "Email" FROM users WHERE "User" = $1;`,[user]);
