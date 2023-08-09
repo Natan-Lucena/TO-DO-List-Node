@@ -2,7 +2,7 @@ const connect = require('./elephantsql');
 
 const getAll = async(jwt) => {
     const client = await connect();
-    const tasks = await client.query('SELECT * FROM tasks WHERE jwt = $1', [jwt]);
+    const tasks = await client.query('SELECT id, hora, nome FROM tasks WHERE jwt = $1', [jwt]);
     client.release();
     return tasks;
 };

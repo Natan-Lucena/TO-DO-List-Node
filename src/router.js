@@ -4,8 +4,8 @@ const authController = require('./controllers/authController');
 
 const router = express.Router();
 
+router.get('/tasks/:jwt',  tasksController.getAll);
 router.post('/insert', tasksController.insertData);
-router.post('/tasks',  tasksController.getAll);
 router.delete('/delete', tasksController.deleteData);
 router.put('/update', tasksController.updateTask);
 router.post('/auth/register', authController.registerUser);

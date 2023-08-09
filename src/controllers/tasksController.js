@@ -2,7 +2,7 @@ const tasksModel = require('../models/tasksModel');
 
 const getAll = async (req,res) => {
     try{
-        const {jwt} = req.body
+        const {jwt} = decodeURIComponent(req.params.jwt)
         const tasks = await tasksModel.getAll(jwt);
         console.log(tasks.rows);
         res.status(200).json(tasks.rows);
