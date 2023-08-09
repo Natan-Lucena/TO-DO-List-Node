@@ -36,8 +36,10 @@ const deleteData = async (req,res) => {
 
 const updateTask = async (req,res) => {
     try{
-        const {nome,hora,id,jwt} = req.body;
-        await tasksModel.updateTask(nome,hora,id,jwt);
+        const {nome,hora,id,jwt,feito} = req.body;
+        let feitoBoolean;
+        if(feito == 0){ feitoBoolean = "FALSE"}else{feitoBoolean = "TRUE"}
+        await tasksModel.updateTask(nome,hora,feitoBoolean,id,jwt);
         res.status(200).send('Tarefa atualizada com sucesso!');
     }catch(error){
         console.error('Erro ao executar a consulta:', error);
