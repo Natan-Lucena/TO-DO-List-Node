@@ -9,7 +9,7 @@ const getAll = async(jwt) => {
 
 const insertData = async(nome, hora, jwt, desc, dias) => {
     const client = await connect();
-    await client.query('INSERT INTO tasks (nome, hora, jwt, feito, "desc", ativo, dias) VALUES ($1, $2, $3, $4, $5, true, dias)', [nome, hora, jwt, "FALSE", desc, dias]);
+    await client.query('INSERT INTO tasks (nome, hora, jwt, feito, "desc", ativo, dias) VALUES ($1, $2, $3, $4, $5, true, $6)', [nome, hora, jwt, "FALSE", desc, dias]);
     client.release();
     return;
 };
