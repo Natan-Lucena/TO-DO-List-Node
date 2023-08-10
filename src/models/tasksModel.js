@@ -2,14 +2,14 @@ const connect = require('./elephantsql');
 
 const getAll = async(jwt) => {
     const client = await connect();
-    const tasks = await client.query('SELECT id, hora, nome, feito, "desc" FROM tasks WHERE jwt = $1 AND ativo = true', [jwt]);
+    const tasks = await client.query('SELECT id, hora, nome, feito, "desc", dias FROM tasks WHERE jwt = $1 AND ativo = true', [jwt]);
     client.release();
     return tasks;
 };
 
-const insertData = async(nome, hora, jwt, desc) => {
+const insertData = async(nome, hora, jwt, desc, dias) => {
     const client = await connect();
-    await client.query('INSERT INTO tasks (nome, hora, jwt, feito, "desc", ativo) VALUES ($1, $2, $3, $4, $5, true)', [nome, hora, jwt, "FALSE", desc]);
+    await client.query('INSERT INTO tasks (nome, hora, jwt, feito, "desc", ativo, dias) VALUES ($1, $2, $3, $4, $5, true, dias)', [nome, hora, jwt, "FALSE", desc, dias]);
     client.release();
     return;
 };
@@ -21,9 +21,9 @@ const deleteData = async(nome, jwt) => {
     return;
 };
 
-const updateTask = async(nome, hora ,feito, id, jwt, desc) => {
+const updateTask = async(nome, hora ,feito, id, jwt, desc, dias) => {
     const client = await connect();
-    await client.query('UPDATE tasks SET hora = $1, nome = $2, feito = $3, "desc" = $4 WHERE id = $5 AND jwt = $6', [hora, nome,feito,desc,id,jwt]);
+    await client.query('UPDATE tasks SET hora = $1, nome = $2, feito = $3, "desc" = $4, dias = $5 WHERE id = $6 AND jwt = $7', [hora, nome,feito,desc,dias,id,jwt]);
     client.release();
     return;
 };
