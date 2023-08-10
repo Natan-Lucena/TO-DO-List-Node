@@ -14,8 +14,8 @@ const getAll = async (req,res) => {
 
 const insertData = async (req,res) => {
     try{
-        const { nome, hora , jwt} = req.body;
-        await tasksModel.insertData(nome, hora , jwt);
+        const { nome, hora , jwt, desc} = req.body;
+        await tasksModel.insertData(nome, hora , jwt, desc);
         res.status(200).send('Tarefa inserido com sucesso!');
     }catch(error){
         console.error('Erro ao executar a consulta:', error);
@@ -36,10 +36,10 @@ const deleteData = async (req,res) => {
 
 const updateTask = async (req,res) => {
     try{
-        const {nome,hora,id,jwt,feito} = req.body;
+        const {nome,hora,id,jwt,feito,desc} = req.body;
         let feitoBoolean;
         if(feito == 0){ feitoBoolean = "FALSE"}else{feitoBoolean = "TRUE"}
-        await tasksModel.updateTask(nome,hora,feitoBoolean,id,jwt);
+        await tasksModel.updateTask(nome,hora,feitoBoolean,id,jwt,desc);
         res.status(200).send('Tarefa atualizada com sucesso!');
     }catch(error){
         console.error('Erro ao executar a consulta:', error);
