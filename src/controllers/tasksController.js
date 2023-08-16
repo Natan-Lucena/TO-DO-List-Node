@@ -12,6 +12,18 @@ const getAll = async (req,res) => {
     }
 };
 
+const getNotActive = async (req,res) => {
+    try{
+        const jwt = decodeURIComponent(req.params.jwt)
+        const tasks = await tasksModel.getNotActive(jwt);
+        console.log(tasks.rows);
+        res.status(200).json(tasks.rows);
+    }catch(error){
+        console.error('Erro ao executar a consulta:', error);
+        res.status(500).send('Erro ao consultar o banco de dados');
+    }
+};
+
 const insertData = async (req,res) => {
     try{
         const { nome, hora , jwt, desc, dias} = req.body;
@@ -34,6 +46,17 @@ const deleteData = async (req,res) => {
     }
 };
 
+const setActive = async (req,res) => {
+    try{
+        const {nome,jwt} =  req.body;
+        await tasksModel.setActive(nome,jwt);
+        res.status(200).send('Tarefa ativa com sucesso!');
+    } catch(error){
+        console.error('Erro ao executar a consulta:', error);
+        res.status(500).send('Erro ao consultar o banco de dados');
+    } 
+};
+
 const updateTask = async (req,res) => {
     try{
         const {nome,hora,id,jwt,feito,desc,dias} = req.body;
@@ -51,5 +74,7 @@ module.exports = {
     getAll,
     insertData,
     deleteData,
-    updateTask
+    updateTask,
+    getNotActive,
+    setActive
 };
