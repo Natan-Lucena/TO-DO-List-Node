@@ -26,9 +26,18 @@ const getNotActive = async (req,res) => {
 
 const insertData = async (req,res) => {
     try{
+        let diasSemana = ["Segunda","Terca","Quarta","Quinta","Sexta","Sabado","Domingo"];
         const { nome, hora , jwt, desc, dias} = req.body;
-        await tasksModel.insertData(nome, hora , jwt, desc, dias);
-        res.status(200).send('Tarefa inserido com sucesso!');
+        if(dias == "Todos"){
+            for(let i = 0; i < diasSemana.length; i++){
+                let dia = diasSemana[i];
+                await tasksModel.insertData(nome, hora , jwt, desc, dia);
+            }
+            return res.status(200).send('Tarefa inserido com sucesso!');
+        }else{
+            await tasksModel.insertData(nome, hora , jwt, desc, dias);
+            res.status(200).send('Tarefa inserido com sucesso!');
+        }
     }catch(error){
         console.error('Erro ao executar a consulta:', error);
         res.status(500).send('Erro ao consultar o banco de dados');
