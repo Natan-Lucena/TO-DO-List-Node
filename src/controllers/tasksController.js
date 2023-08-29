@@ -46,8 +46,8 @@ const insertData = async (req,res) => {
 
 const deleteData = async (req,res) => {
     try{
-        const { nome , jwt} = req.body;
-        await tasksModel.deleteData(nome,jwt);
+        const { nome , jwt, id} = req.body;
+        await tasksModel.deleteData(nome,jwt,id);
         res.status(200).send('Tarefa excluida com sucesso!');
     } catch(error){
         console.error('Erro ao executar a consulta:', error);

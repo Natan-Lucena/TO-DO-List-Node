@@ -21,14 +21,14 @@ const insertData = async(nome, hora, jwt, desc, dias) => {
     return;
 };
 
-const deleteData = async(nome, jwt) => {
+const deleteData = async(nome, jwt, id) => {
     const client = await connect();
-    await client.query('UPDATE tasks SET ativo = false WHERE nome = $1 AND jwt = $2', [nome, jwt]);
+    await client.query('UPDATE tasks SET ativo = false WHERE nome = $1 AND jwt = $2 AND id = $3', [nome, jwt, id]);
     client.release();
     return;
 };
 
-const setActive = async(nome,jwt) => {
+const setActive = async(nome,jwt,) => {
     const client = await connect();
     await client.query('UPDATE tasks SET ativo = true WHERE nome = $1 AND jwt = $2', [nome, jwt]);
     client.release();
