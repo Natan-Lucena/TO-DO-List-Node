@@ -12,6 +12,7 @@ router.put('/update', tasksController.updateTask);
 router.put('/activeTask', tasksController.setActive);
 
 router.post('/auth/register', authController.registerUser);
-router.post('/auth/login',authController.loginUser)
+router.post('/auth/login',authController.loginUser);
+router.post('auth/getUser/:jwt',authController.getUser);
 
 module.exports = router;

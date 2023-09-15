@@ -44,8 +44,21 @@ const loginUser = async (req,res) =>{
     }
 };
 
+const getUser = async(req,res) => {
+    try{
+        const jwt = decodeURIComponent(req.params.jwt);
+        const user = await authModel.getUser(jwt);
+        console.log(user.rows);
+        res.status(200).json(user.rows);
+    }catch(error){
+        console.error("Erro ao efetuar solicitar o usuario:",error)
+        return res.status(500).send("Ocorreu um erro")
+    }
+}
+
 
 module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    getUser
 };

@@ -40,9 +40,17 @@ const registerUser =  async (user, password, email) => {
     
 };
 
+const getUser =  async (jwt) => {
+    const client =  await connect();
+    const user = await client.query('SELECT User FROM users WHERE jwt = $1', [jwt]);
+    client.release();
+    return user;
+}
+
 module.exports = {
     findByUser,
     findByEmail,
     registerUser,
-    verifyPassword
+    verifyPassword,
+    getUser
 };
