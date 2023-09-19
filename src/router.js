@@ -11,8 +11,8 @@ router.delete('/delete', tasksController.deleteData);
 router.put('/update', tasksController.updateTask);
 router.put('/activeTask', tasksController.setActive);
 
+router.get('/auth/getUser/:jwt',authController.getUser);
 router.post('/auth/register', authController.registerUser);
 router.post('/auth/login',authController.loginUser);
-router.post('/auth/getUser/:jwt',authController.getUser);
 
 module.exports = router;
