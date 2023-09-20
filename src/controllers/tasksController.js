@@ -69,6 +69,15 @@ const setActive = async (req,res) => {
 const updateTask = async (req,res) => {
     try{
         const {nome,hora,id,jwt,feito,desc,dias} = req.body;
+        if(dias == "Todos") {
+            let diasSemana = ["Segunda","Terca","Quarta","Quinta","Sexta","Sabado","Domingo"];
+            await tasksModel.deleteData(nome, jwt, id);
+            for(let i = 0; i < diasSemana.length; i++){
+                let dia = diasSemana[i];
+                await tasksModel.insertData(nome, hora , jwt, desc, dia);
+            }
+            return res.status(200).send('Tarefa atualizada com sucesso!');
+        }
         let feitoBoolean;
         if(feito == 0){ feitoBoolean = "FALSE"}else{feitoBoolean = "TRUE"}
         await tasksModel.updateTask(nome,hora,feitoBoolean,id,jwt,desc,dias);
