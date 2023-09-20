@@ -4,7 +4,7 @@ const getAll = async (req,res) => {
     try{
         const jwt = decodeURIComponent(req.params.jwt)
         const tasks = await tasksModel.getAll(jwt);
-        console.log(tasks.rows);
+        console.table(tasks.rows);
         res.status(200).json(tasks.rows);
     }catch(error){
         console.error('Erro ao executar a consulta:', error);
