@@ -28,7 +28,7 @@ const insertData = async (req,res) => {
     try{
         let diasSemana = ["Segunda","Terca","Quarta","Quinta","Sexta","Sabado","Domingo"];
         const { nome, hora , jwt, desc, dias} = req.body;
-        if(dias == "Todos"){
+        if(dias == "Todos" || !dias){
             for(let i = 0; i < diasSemana.length; i++){
                 let dia = diasSemana[i];
                 await tasksModel.insertData(nome, hora , jwt, desc, dia);
