@@ -1,6 +1,6 @@
 const { Pool } = require('pg');
 
-const URL = 'postgres://fpnurlqg:R_XZb9RdZU3zASqVjm4yF01MmiXNqpeS@rajje.db.elephantsql.com/fpnurlqg';
+const URL = process.env.URL_CONNECTION;
 
 async function connect(){
   if (global.connection)
