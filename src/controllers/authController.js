@@ -1,4 +1,5 @@
 const authModel = require('../models/authModel');
+const emailSender = require('../models/emailSender');
 
 const registerUser = async (req, res) => {
     try{
@@ -18,6 +19,7 @@ const registerUser = async (req, res) => {
         if(emailFinder){
             return res.status(422).json({msg:"This Email is already been used"})
         }
+        await emailSender.sendEmail(email);
         await authModel.registerUser(user, password.toString(), email)
         return res.status(200).json({msg: "Congratulations, You can use To do List Now"});
     }catch(error){
